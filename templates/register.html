@@ -103,31 +103,28 @@ form label.floatLabel {
 }
   </style>
   <body>
-    <form action="#" method="post">
+    <form method="post">
+      {% csrf_token %}
         <h2>Register Form</h2>
           <p>
-            <label for="Email" class="floatLabel">Name</label>
-            <input id="Email" name="Email" type="text">
+            <label for="Name" class="floatLabel">Name</label>
+            <input id="name" name="name" type="text">
           </p>
           <p>
-            <label for="Email" class="floatLabel">Age</label>
-            <input id="Email" name="Email" type="text">
+            <label for="Age" class="floatLabel">Age</label>
+            <input id="age" name="age" type="text">
           </p>
           <p>
-            <label for="Email" class="floatLabel">Gender</label>
-            <input id="Email" name="Email" type="text">
+            <label for="Address" class="floatLabel">Address</label>
+            <input id="address" name="address" type="text">
           </p>
           <p>
-            <label for="Email" class="floatLabel">Address</label>
-            <input id="Email" name="Email" type="text">
-          </p>
-          <p>
-            <label for="Email" class="floatLabel">Mobile No.</label>
-            <input id="Email" name="Email" type="text">
+            <label for="Mobile" class="floatLabel">Mobile No.</label>
+            <input id="mobile" name="mobile" type="text">
           </p>
           <p>
             <label for="Email" class="floatLabel">Email</label>
-            <input id="Email" name="Email" type="text">
+            <input id="email" name="email" type="email">
           </p>
           <p>
             <label for="password" class="floatLabel">Password</label>
