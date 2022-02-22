@@ -2,6 +2,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from home.models import  accounts
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -10,8 +11,9 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
-# def register(request):
-#     return render(request, 'register.html')
+def contuct_us(request):
+    return render(request, 'contuct_us.html')
+
 
 def register(request):
     context = {}
@@ -27,7 +29,24 @@ def register(request):
             saveRecord.mobile = request.POST.get('mobile')
 
             saveRecord.save()
-            return HttpResponse("added successfully !!")
+            messages.success(request, 'Acccount Created Successsfully')
+            return render(request, 'register.html', context)
 
     else:
         return render(request, 'register.html', context)
+
+
+def login(request):
+    context = {}
+    if request.method == 'POST':
+        try:
+            userInfo = accounts.objects.get(email=request.POST.get('email'))
+            if (request.POST.get('password') == (userInfo.password)):
+                request.session['email'] = userInfo.email
+                return redirect('home')
+            else:
+                messages.error(request, 'Incorrect Password...!')
+        except accounts.DoesNotExist as e:
+            messages.error(request, 'No user found...!')
+
+    return render(request, 'login.html', context)
