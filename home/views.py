@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from home.models import  accounts
+from home.models import  accounts, msgs
 from django.contrib import messages
 
 # Create your views here.
@@ -11,8 +11,8 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
-def contuct_us(request):
-    return render(request, 'contuct_us.html')
+def ccontact_form(request):
+    return render(request, 'contact_form.html')
 
 
 def register(request):
@@ -50,3 +50,20 @@ def login(request):
             messages.error(request, 'No user found...!')
 
     return render(request, 'login.html', context)
+
+
+def contact_form(request):
+    if request.method == 'POST':
+        # user = accounts.objects.get(email=request.session['email'])
+        if request.POST.get('person_name') and request.POST.get('person_email') and request.POST.get('person_contact') and request.POST.get('msg'):
+            user = msgs()
+            user.person_name = request.POST.get('person_name')
+            user.person_email = request.POST.get('person_email')
+            user.person_contact = request.POST.get('person_contact')
+            user.msg = request.POST.get('msg')
+
+            user.save()
+            messages.success(request, 'We Have Received Your Massage')
+            return redirect('contact_form')
+    else:
+        return render(request, 'contact_form.html',)

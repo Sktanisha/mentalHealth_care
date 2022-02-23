@@ -26,3 +26,9 @@ class accounts(models.Model):
         if accounts.objects.filter(email=self.email):
             return True
         return False
+
+class msgs(models.Model):
+    person_name = models.CharField(max_length=20)
+    person_email = models.CharField(max_length=20)
+    person_contact = models.IntegerField(max_length=11)
+    msg = models.CharField(max_length=1000)
