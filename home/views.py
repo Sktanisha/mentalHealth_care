@@ -14,6 +14,12 @@ def login(request):
 def ccontact_form(request):
     return render(request, 'contact_form.html')
 
+def view_profile(request):
+    return render(request, 'view_profile.html')
+
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
+
 
 def register(request):
     context = {}
@@ -63,7 +69,7 @@ def contact_form(request):
             user.msg = request.POST.get('msg')
 
             user.save()
-            messages.success(request, 'We Have Received Your Massage')
+            messages.success(request, 'Thanks for contacting us!')
             return redirect('contact_form')
     else:
         return render(request, 'contact_form.html',)

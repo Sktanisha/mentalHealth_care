@@ -276,20 +276,23 @@ input {
             <form class="post-form" action="" method="POST" id="contact_form">
               {% csrf_token %}
             <div class="app-form-group">
-              <input name="person_name" class="app-form-control" placeholder="NAME" >
+              <input name="person_name" class="app-form-control" placeholder="NAME" required>
             </div>
             <div class="app-form-group">
-              <input name="person_email" class="app-form-control" placeholder="EMAIL">
+              <input name="person_email" class="app-form-control" placeholder="EMAIL" required >
             </div>
             <div class="app-form-group">
-              <input name="person_contact" class="app-form-control" placeholder="CONTACT NO">
+              <input name="person_contact" class="app-form-control" placeholder="CONTACT NO" required>
             </div>
             <div class="app-form-group message">
-              <input name="msg" class="app-form-control" placeholder="MESSAGE">
+              <input name="msg" class="app-form-control" placeholder="MESSAGE" required>
             </div>
             <div class="app-form-group buttons">
               <button class="app-form-button">SEND</button>
             </div>
+            {% for message in messages %}
+            <h4 style="color: #2ad9f8;"> {{message}} </h4>
+            {% endfor %}
             </form>
           </div>
         </div>
