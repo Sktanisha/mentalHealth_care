@@ -12,7 +12,7 @@ body{
     margin-bottom: 3%;
     border-radius: 0.5rem;
     background: #fff;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
 }
 .profile-img{
     text-align: center;
@@ -122,12 +122,13 @@ body{
                         <div class="profile-img">
                             <img src="{% static 'img/view.jpg ' %}" alt=""/>
                         </div>
+                        
                     </div>
                     {% for user in acc %}
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        {{user.fname}}&ensp;{{user.lname}}
+                                        {{user.name}}
                                     </h5>
                                     
                                     <br>
@@ -163,18 +164,18 @@ body{
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label> First Name</label>
+                                                <label> Age</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{user.fname}}</p>
+                                                <p>{{user.age}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Last Name</label>
+                                                <label>Address</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{user.lname}}</p>
+                                                <p>{{user.address}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -190,7 +191,7 @@ body{
                                                 <label>Phone</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{user.contact}}</p>
+                                                <p>{{user.mobile}}</p>
                                             </div>
                                         </div>
                                         <div class="row">

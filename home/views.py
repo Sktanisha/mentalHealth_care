@@ -15,10 +15,15 @@ def ccontact_form(request):
     return render(request, 'contact_form.html')
 
 def view_profile(request):
-    return render(request, 'view_profile.html')
+    user = accounts.objects.get(email=request.session['email'])
+    acc = accounts.objects.raw( 'SELECT * FROM users WHERE email = %s', [user.email] )
+    return render(request, 'view_profile.html', {'acc': acc, 'user': user})
 
 def edit_profile(request):
     return render(request, 'edit_profile.html')
+
+def home(request):
+    return render(request, 'home.html')  
 
 
 def register(request):
