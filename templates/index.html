@@ -46,7 +46,7 @@
                           <a href="#about" class="nav-link smoothScroll">About Us</a>
                       </li>
                       <li class="nav-item">
-                          <a href="#project" class="nav-link smoothScroll">contact Us</a>
+                          <a href="{% url 'contact_form' %}" class="nav-link smoothScroll">contact Us</a>
                       </li>
                       <li class="nav-item">
                           <a href="blog.html" class="nav-link">Blogs</a>
@@ -60,8 +60,8 @@
                            </svg>
                            </a>
                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                             <li><a class="dropdown-item" href="#">Login</a></li>
-                             <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                             <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                             <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
                              <li><hr class="dropdown-divider"></li>
                              <!-- <li><a class="dropdown-item" href="#">COntact Us</a></li> -->
                            </ul>
