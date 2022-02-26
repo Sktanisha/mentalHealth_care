@@ -62,6 +62,7 @@ https://templatemo.com/tm-538-digital-trend
   body {
     background: var(--white-color);
     font-family: var(--base-font-family);
+    
   }
 
 
@@ -111,6 +112,15 @@ https://templatemo.com/tm-538-digital-trend
   }
 
 
+*{
+  box-sizing: border-box;
+}
+
+.column{
+  float: left;
+  width: 33.33;
+  padding: 3px;
+}
   /*  BLOCKQUOTES */
   .quote {
     position: relative;
@@ -372,23 +382,10 @@ https://templatemo.com/tm-538-digital-trend
 
   .project-wrapper img {
     border-radius: var(--border-radius-small);
-  }
-  * {
-    box-sizing: border-box;
+    height: 700px;
   }
   
-  .column {
-    float: left;
-    width: 33.33%;
-    padding: 5px;
-  }
   
-  /* Clearfix (clear floats) */
-  .row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
   /* .project-info {
     background: var(--white-color);
     border-radius: var(--border-radius-small);
@@ -614,7 +611,7 @@ https://templatemo.com/tm-538-digital-trend
   /*---------------------------------------
      SOCIAL ICON              
   -----------------------------------------*/
-
+/* 
   .social-icon {
     position: relative;
     padding: 0;
@@ -632,7 +629,7 @@ https://templatemo.com/tm-538-digital-trend
     font-size: var(--base-font-size);
     margin: 10px;
     text-align: center;
-  }
+  } */
 
 
 

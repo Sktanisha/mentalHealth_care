@@ -11,7 +11,7 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
-def ccontact_form(request):
+def contact_form(request):
     return render(request, 'contact_form.html')
 
 def view_profile(request):
