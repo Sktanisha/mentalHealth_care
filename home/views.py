@@ -78,3 +78,6 @@ def contact_form(request):
             return redirect('contact_form')
     else:
         return render(request, 'contact_form.html',)
+
+def quizform(request):
+    return render(request, 'quizform.html') 
