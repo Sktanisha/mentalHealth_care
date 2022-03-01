@@ -17,6 +17,7 @@ class accounts(models.Model):
     email=models.EmailField(max_length=30)
     password = models.CharField(max_length = 20)
     confirm_password = models.CharField(max_length = 20)
+    # image = models.ImageField(upload_to=filepath, null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.now)
     
     class Meta:
@@ -32,3 +33,9 @@ class msgs(models.Model):
     person_email = models.CharField(max_length=20)
     person_contact = models.IntegerField(max_length=11)
     msg = models.CharField(max_length=1000)
+
+# def filepath(request, filename):
+#     old_filename = filename
+#     timeNow = datetime.now().strftime('%Y%m%d%H:%M:%S')
+#     filename = "%s-%s" % (timeNow, old_filename)
+#     return os.path.join('uploads/', filename)

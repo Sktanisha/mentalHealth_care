@@ -78,3 +78,12 @@ def contact_form(request):
             return redirect('contact_form')
     else:
         return render(request, 'contact_form.html',)
+
+def userindex(request):
+    return render(request, 'userindex.html')
+
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
+
+def addpic(request):
+    return render(request, 'addpic.html')
