@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from home.models import  accounts, msgs
 from django.contrib import messages
+from django.db import connection
 
 # Create your views here.
 def index(request):
@@ -80,4 +81,38 @@ def contact_form(request):
         return render(request, 'contact_form.html',)
 
 def quizform(request):
+    if request.method == 'POST':
+        #  if request.POST.get('ques1') and request.POST.get('ques2') and request.POST.get('ques3') and request.POST.get('ques4') and request.POST.get('ques5') and request.POST.get('ques6') and request.POST.get('ques7') and request.POST.get('ques8') :
+            # print("hii")
+            q1= request.POST.get('ques1')
+            
+            q2= request.POST.get('ques2')
+           
+            q3= request.POST.get('ques3')
+            q4= request.POST.get('ques4')
+            q5= request.POST.get('ques5')
+            q6= request.POST.get('ques6')
+            q7= request.POST.get('ques7')
+            q8= request.POST.get('ques8')
+            # print(q1)
+            # print(q2)
+            # print(q3)
+            
+            # print(q4)
+           
+            # print(q5)
+            
+            # print(q6)
+           
+            # print(q7)
+            # print(q8)
+            if q1=='1' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='37' and q7=='28' and q8=='32':
+                messages.success(request, 'you are suffering from anxiety')
+                return redirect('result')
+            else:
+                messages.success(request, 'you are suffering from deppression')
+                return redirect('result')
     return render(request, 'quizform.html') 
+
+def result(request):
+    return render(request, 'result.html')  

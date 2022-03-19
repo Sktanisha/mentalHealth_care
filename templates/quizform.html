@@ -34,11 +34,22 @@ body {
     background: white;
     padding: 20px 15px
 }
+.btn.btn-primary {
+    border-radius: 25px;
+    margin-top: 20px
+}
+
+@media(max-width: 450px) {
+    .subject {
+        font-size: 12px
+    }
+}
     </style>
   </head>
   <body>
     <div class="container mb-5">
-      
+      <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
     <p>1.How often have you been bothered by feeling down, depressed or hopeless?</p>
 <input type="radio" id="1" name="ques1" value="1" >
 <label for="1">Not at all</label><br>
@@ -92,8 +103,8 @@ hyperlink: What is an anxiety attack?
 <label for="20">I fly off the handle easily</label> <br><br>
 
 <p>6.Have you been bothered by worrying about any of the following?   </p>
-<input type="checkbox" id="child1" name="ques6" value="child1" >
-<label for="child1">Your health</label><br>
+<input type="checkbox" id="37" name="ques6" value="37" >
+<label for="37">Your health</label><br>
 <input type="checkbox" id="21" name="ques6" value="21" >
 <label for="21">  Your weight or how you look</label><br>
 <input type="checkbox" id="22" name="ques6" value="22" >
@@ -129,8 +140,14 @@ hyperlink: What is an anxiety attack?
 <input type="checkbox" id="35" name="ques8" value="35">
 <label for="35">    leaving everything behind</label><br>
 <input type="checkbox" id="36" name="ques8" value="36">
-<label for="36">  do drugs</label><br>
+<label for="36">  do drugs</label><br><br>
+<div class="input-grp">
+  <button type="submit" class="btn-btn-primary px-4 py-2 fw-bold"> Show Result</button>
 </div>
+
+</form>
+</div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
