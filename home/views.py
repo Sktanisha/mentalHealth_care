@@ -94,20 +94,29 @@ def quizform(request):
             q6= request.POST.get('ques6')
             q7= request.POST.get('ques7')
             q8= request.POST.get('ques8')
-            # print(q1)
-            # print(q2)
-            # print(q3)
+            print(q1)
+            print(q2)
+            print(q3)
             
-            # print(q4)
+            print(q4)
            
-            # print(q5)
+            print(q5)
             
-            # print(q6)
+            print(q6)
            
-            # print(q7)
-            # print(q8)
+            print(q7)
+            print(q8)
             if q1=='1' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='37' and q7=='28' and q8=='32':
                 messages.success(request, 'you are suffering from anxiety')
+                return redirect('result')
+            elif q1=='2' and q2== '6' and q3== '10' and q4 == '14' and q5== '18' and q6=='21' and q7=='29' and q8=='33':
+                messages.success(request, 'you are suffering from panic attack')
+                return redirect('result')
+            elif q1=='3' and q2== '5' and q3== '11' and q4 == '13' and q5== '20' and q6=='24' and q7=='28' and q8=='34':
+                messages.success(request, 'you are suffering from OCD')
+                return redirect('result')
+            elif q1=='4' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='40' and q7=='30' and q8=='32':
+                messages.success(request, 'you are suffering from stress')
                 return redirect('result')
             else:
                 messages.success(request, 'you are suffering from deppression')
