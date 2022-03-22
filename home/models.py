@@ -3,11 +3,11 @@ from datetime import datetime
 import os
 # Create your models here.
 
-# def filepath(request, filename):
-#     old_filename = filename
-#     timeNow = datetime.now().strftime('%Y%m%d%H:%M:%S')
-#     filename = "%s-%s" % (timeNow, old_filename)
-#     return os.path.join('uploads/', filename)
+def filepath(request, filename):
+    old_filename = filename
+    timeNow = datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s-%s" % (timeNow, old_filename)
+    return os.path.join('uploads/', filename)
 
 class accounts(models.Model):
     name = models.CharField(max_length = 20)
@@ -17,7 +17,7 @@ class accounts(models.Model):
     email=models.EmailField(max_length=30)
     password = models.CharField(max_length = 20)
     confirm_password = models.CharField(max_length = 20)
-    # image = models.ImageField(upload_to=filepath, null=True, blank=True)
+    image = models.ImageField(upload_to=filepath, null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.now)
     
     class Meta:
