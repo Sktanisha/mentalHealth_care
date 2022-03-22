@@ -39,7 +39,7 @@ def register(request):
             saveRecord.password = request.POST.get('password')
             saveRecord.email = request.POST.get('email')
             saveRecord.mobile = request.POST.get('mobile')
-
+   
             saveRecord.save()
             messages.success(request, 'Acccount Created Successsfully')
             return render(request, 'register.html', context)
