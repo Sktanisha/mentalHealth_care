@@ -85,5 +85,8 @@ def userindex(request):
 def edit_profile(request):
     return render(request, 'edit_profile.html')
 
-def addpic(request):
-    return render(request, 'addpic.html')
+def search(request):
+    return render(request, 'search.html')
+
+def doctorslist(request):
+    return render(request, 'doctorslist.html')
