@@ -34,102 +34,120 @@ body {
     background: white;
     padding: 20px 15px
 }
+.btn.btn-primary {
+    border-radius: 25px;
+    margin-top: 20px
+}
+
+@media(max-width: 450px) {
+    .subject {
+        font-size: 12px
+    }
+}
     </style>
   </head>
   <body>
     <div class="container mb-5">
-      
+      <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
     <p>1.How often have you been bothered by feeling down, depressed or hopeless?</p>
-<input type="radio" id="child" name="age" value="child" >
-<label for="child">Not at all</label><br>
-<input type="radio" id="adult" name="age" value="adult">
-<label for="adult">Several days</label><br>
-<input type="radio" id="senior" name="age" value="senior">
-<label for="senior">More than half the days</label><br>
-<input type="radio" id="senior" name="age" value="senior">
-<label for="senior">Nearly every day</label> <br><br>
+<input type="radio" id="1" name="ques1" value="1" >
+<label for="1">Not at all</label><br>
+<input type="radio" id="2" name="ques1" value="2">
+<label for="2">Several days</label><br>
+<input type="radio" id="3" name="ques1" value="3">
+<label for="3">More than half the days</label><br>
+<input type="radio" id="4" name="ques1" value="4">
+<label for="4">Nearly every day</label> <br><br>
 
 <p>2.What is your sleep like at the moment?</p>
-<input type="radio" id="child1" name="age1" value="child1" >
-<label for="child1">I sleep no longer than 7-8 hours a night and I don't nap during the day</label><br>
-<input type="radio" id="adult1" name="age1" value="adult1">
-<label for="adult1">I sleep no longer than 10 hours in a 24-hour period including naps</label><br>
-<input type="radio" id="adult1" name="age1" value="adult1">
-<label for="adult1">I sleep no longer than 12 hours in a 24-hour period including naps</label><br>
-<input type="radio" id="senior1" name="age1" value="senior1">
-<label for="senior1">I sleep longer than 12 hours in a 24-hour period including naps</label> <br><br>
+<input type="radio" id="5" name="ques2" value="5" >
+<label for="5">I sleep no longer than 7-8 hours a night and I don't nap during the day</label><br>
+<input type="radio" id="6" name="ques2" value="6">
+<label for="6">I sleep no longer than 10 hours in a 24-hour period including naps</label><br>
+<input type="radio" id="7" name="ques2" value="7">
+<label for="7">I sleep no longer than 12 hours in a 24-hour period including naps</label><br>
+<input type="radio" id="8" name="ques2" value="8">
+<label for="8">I sleep longer than 12 hours in a 24-hour period including naps</label> <br><br>
 
 <p>3.How has your appetite been?</p>
-<input type="radio" id="child1" name="age1" value="child1" >
-<label for="child1">There is no change in my usual appetite</label><br>
-<input type="radio" id="adult1" name="age1" value="adult1">
-<label for="adult1">I occasionally eat more or less than usual</label><br>
-<input type="radio" id="senior1" name="age1" value="senior1">
-<label for="senior1">I eat much more or much less than usual</label> <br>
-<input type="radio" id="senior1" name="age1" value="senior1">
-<label for="senior1">I rarely eat within a 24-hour period or I feel the need to overeat at every</label> <br><br>
+<input type="radio" id="9" name="ques3" value="9" >
+<label for="9">There is no change in my usual appetite</label><br>
+<input type="radio" id="10" name="ques3" value="10">
+<label for="10">I occasionally eat more or less than usual</label><br>
+<input type="radio" id="11" name="ques3" value="11">
+<label for="11">I eat much more or much less than usual</label> <br>
+<input type="radio" id="12" name="ques3" value="12">
+<label for="12">I rarely eat within a 24-hour period or I feel the need to overeat at every</label> <br><br>
 
 <p>4.Have you had an anxiety attack (suddenly feeling fear or anxiety)</p>
-<input type="radio" id="child" name="age" value="child" >
-<label for="child">Not at all</label><br>
-<input type="radio" id="adult" name="age" value="adult">
-<label for="adult">Several days</label><br>
-<input type="radio" id="senior" name="age" value="senior">
-<label for="senior">More than half the days</label><br>
-<input type="radio" id="senior" name="age" value="senior">
-<label for="senior">Nearly every day</label> <br>
+<input type="radio" id="13" name="ques4" value="13" >
+<label for="13">Not at all</label><br>
+<input type="radio" id="14" name="ques4" value="14">
+<label for="14">Several days</label><br>
+<input type="radio" id="15" name="ques4" value="15">
+<label for="15">More than half the days</label><br>
+<input type="radio" id="16" name="ques4" value="16">
+<label for="16">Nearly every day</label> <br>
 hyperlink: What is an anxiety attack?
 <br><br>
 
 <p>5.How easily are you angered?</p>
-<label for="child1">Not easily, I am able to control my temper</label><br>
-<input type="radio" id="adult1" name="age1" value="adult1">
-<label for="adult1">Some things make me angry, but my temper is generally under control</label><br>
-<input type="radio" id="senior1" name="age1" value="senior1">
-<label for="senior1">I don't always show my anger, but if I do - watch out</label> <br>
-<input type="radio" id="senior1" name="age1" value="senior1">
-<label for="senior1">I fly off the handle easily</label> <br><br>
+<input type="radio" id="17" name="ques5" value="17">
+<label for="17">Not easily, I am able to control my temper</label><br>
+<input type="radio" id="18" name="ques5" value="18">
+<label for="18">Some things make me angry, but my temper is generally under control</label><br>
+<input type="radio" id="19" name="ques5" value="19">
+<label for="19">I don't always show my anger, but if I do - watch out</label> <br>
+<input type="radio" id="20" name="ques5" value="20">
+<label for="20">I fly off the handle easily</label> <br><br>
 
 <p>6.Have you been bothered by worrying about any of the following?   </p>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">Your health</label><br>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">  Your weight or how you look</label><br>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">    The stress of taking care of family members</label><br>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">    Stress at work, school or outside home</label><br>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">      By financial problems or worries</label><br>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">      Having no one to turn to</label><br>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">    Something bad that happened recently</label><br>
-<input type="checkbox" id="child1" name="age1" value="child1" >
-<label for="child1">     None of the above</label><br><br>
+<input type="checkbox" id="37" name="ques6" value="37" >
+<label for="37">Your health</label><br>
+<input type="checkbox" id="21" name="ques6" value="21" >
+<label for="21">  Your weight or how you look</label><br>
+<input type="checkbox" id="22" name="ques6" value="22" >
+<label for="22">    The stress of taking care of family members</label><br>
+<input type="checkbox" id="23" name="ques6" value="23" >
+<label for="23">    Stress at work, school or outside home</label><br>
+<input type="checkbox" id="24" name="ques6" value="24" >
+<label for="24">      By financial problems or worries</label><br>
+<input type="checkbox" id="25" name="ques6" value="25" >
+<label for="25">      Having no one to turn to</label><br>
+<input type="checkbox" id="26" name="ques6" value="26" >
+<label for="26">    Something bad that happened recently</label><br>
+<input type="checkbox" id="27" name="ques6" value="27" >
+<label for="27">     None of the above</label><br><br>
 
 <p>7. How do you view yourself?</p>
-<input type="radio" id="child1" name="age1" value="child1" >
-<label for="child1">I see myself as equally worthwhile and deserving as other people</label><br>
-<input type="radio" id="adult1" name="age1" value="adult1">
-<label for="adult1">I am more self-blaming than usual</label><br>
-<input type="radio" id="senior1" name="age1" value="senior1">
-<label for="senior1">I largely believe that I cause problems for others</label> <br>
-<input type="radio" id="senior1" name="age1" value="senior1">
-<label for="senior1">I think almost constantly about major and minor defects in myself</label> <br><br>
+<input type="radio" id="28" name="ques7" value="28" >
+<label for="28">I see myself as equally worthwhile and deserving as other people</label><br>
+<input type="radio" id="29" name="ques7" value="29">
+<label for="29">I am more self-blaming than usual</label><br>
+<input type="radio" id="30" name="ques7" value="30">
+<label for="30">I largely believe that I cause problems for others</label> <br>
+<input type="radio" id="31" name="ques7" value="31">
+<label for="31">I think almost constantly about major and minor defects in myself</label> <br><br>
 
 <p>8. when you are stressed out, what do you feel like doing?</p>
-<input type="checkbox" id="child2" name="age2" value="child" >
-<label for="child2">isolate yourself</label><br>
-<input type="checkbox" id="adult2" name="age2" value="adult">
-<label for="adult2"> keep everyone away</label><br>
-<input type="checkbox" id="senior2" name="age2" value="senior">
-<label for="senior2">feeling like someplace else all by yourself</label> <br>
-<input type="checkbox" id="senior2" name="age2" value="senior">
-<label for="senior2">    leaving everything behind</label><br>
-<input type="checkbox" id="senior2" name="age2" value="senior">
-<label for="senior2">  do drugs</label><br>
+<input type="checkbox" id="32" name="ques8" value="32" >
+<label for="32">isolate yourself</label><br>
+<input type="checkbox" id="33" name="ques8" value="33">
+<label for="33"> keep everyone away</label><br>
+<input type="checkbox" id="34" name="ques8" value="34">
+<label for="34">feeling like someplace else all by yourself</label> <br>
+<input type="checkbox" id="35" name="ques8" value="35">
+<label for="35">    leaving everything behind</label><br>
+<input type="checkbox" id="36" name="ques8" value="36">
+<label for="36">  do drugs</label><br><br>
+<div class="input-grp">
+  <button type="submit" class="btn-btn-primary px-4 py-2 fw-bold"> Show Result</button>
 </div>
+
+</form>
+</div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
