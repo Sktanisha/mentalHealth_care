@@ -80,15 +80,15 @@ def contact_form(request):
     else:
         return render(request, 'contact_form.html',)
 
-def editprofile(request):
+def edit_profile(request):
     if request.method == 'POST':
         user = accounts.objects.get(email=request.session['email'])
-        if request.POST.get('edit_name') and request.POST.get('edit_age') and request.POST.get('edit_mobile') and request.POST.get('edit_address'):
+        if request.POST.get('editName') and request.POST.get('editAge') and request.POST.get('editMobile') and request.POST.get('editAddress'):
 
-            user.name = request.POST.get('edit_name')
-            user.age = request.POST.get('edit_age')
-            user.mobile = request.POST.get('edit_mobile')
-            user.address = request.POST.get('edit_address')
+            user.name = request.POST.get('editName')
+            user.age = request.POST.get('editAge')
+            user.mobile = request.POST.get('editMobile')
+            user.address = request.POST.get('editAddress')
             user.save()
             messages.success(
                 request, "User details updated successfully...!")
