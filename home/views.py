@@ -80,6 +80,28 @@ def contact_form(request):
     else:
         return render(request, 'contact_form.html',)
 
+def editprofile(request):
+    if request.method == 'POST':
+        user = accounts.objects.get(email=request.session['email'])
+        if request.POST.get('edit_name') and request.POST.get('edit_age') and request.POST.get('edit_mobile') and request.POST.get('edit_address'):
+
+            user.name = request.POST.get('edit_name')
+            user.age = request.POST.get('edit_age')
+            user.mobile = request.POST.get('edit_mobile')
+            user.address = request.POST.get('edit_address')
+            user.save()
+            messages.success(
+                request, "User details updated successfully...!")
+
+            return redirect('editprofile')
+    else:
+        try:
+            user = accounts.objects.get(email=request.session['email'])
+            return render(request, 'editprofile.html', {'user': user})
+        except:
+            messages.error(request, 'You need to login first')
+            return redirect('login')
+
 def quizform(request):
     if request.method == 'POST':
         #  if request.POST.get('ques1') and request.POST.get('ques2') and request.POST.get('ques3') and request.POST.get('ques4') and request.POST.get('ques5') and request.POST.get('ques6') and request.POST.get('ques7') and request.POST.get('ques8') :
