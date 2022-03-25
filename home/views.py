@@ -80,6 +80,17 @@ def contact_form(request):
     else:
         return render(request, 'contact_form.html',)
 
+def userindex(request):
+    return render(request, 'userindex.html')
+
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
+
+def search(request):
+    return render(request, 'search.html')
+
+def doctorslist(request):
+    return render(request, 'doctorslist.html')
 def quizform(request):
     if request.method == 'POST':
         #  if request.POST.get('ques1') and request.POST.get('ques2') and request.POST.get('ques3') and request.POST.get('ques4') and request.POST.get('ques5') and request.POST.get('ques6') and request.POST.get('ques7') and request.POST.get('ques8') :
