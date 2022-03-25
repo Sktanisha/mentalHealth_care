@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from home.models import  accounts, msgs
 from django.contrib import messages
+from django.db import connection
 
 # Create your views here.
 def index(request):
@@ -11,7 +12,7 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
-def ccontact_form(request):
+def contact_form(request):
     return render(request, 'contact_form.html')
 
 def view_profile(request):
@@ -38,7 +39,7 @@ def register(request):
             saveRecord.password = request.POST.get('password')
             saveRecord.email = request.POST.get('email')
             saveRecord.mobile = request.POST.get('mobile')
-
+   
             saveRecord.save()
             messages.success(request, 'Acccount Created Successsfully')
             return render(request, 'register.html', context)
@@ -78,3 +79,50 @@ def contact_form(request):
             return redirect('contact_form')
     else:
         return render(request, 'contact_form.html',)
+
+def quizform(request):
+    if request.method == 'POST':
+        #  if request.POST.get('ques1') and request.POST.get('ques2') and request.POST.get('ques3') and request.POST.get('ques4') and request.POST.get('ques5') and request.POST.get('ques6') and request.POST.get('ques7') and request.POST.get('ques8') :
+            # print("hii")
+            q1= request.POST.get('ques1')
+            
+            q2= request.POST.get('ques2')
+           
+            q3= request.POST.get('ques3')
+            q4= request.POST.get('ques4')
+            q5= request.POST.get('ques5')
+            q6= request.POST.get('ques6')
+            q7= request.POST.get('ques7')
+            q8= request.POST.get('ques8')
+            # print(q1)
+            # print(q2)
+            # print(q3)
+            
+            # print(q4)  
+           
+            # print(q5)
+            
+            # print(q6)
+           
+            # print(q7)
+            # print(q8)
+            
+            if q1=='1' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='37' and q7=='28' and q8=='32':
+                messages.success(request, 'you are suffering from anxiety')
+                return redirect('result')
+            elif q1=='2' and q2== '6' and q3== '10' and q4 == '14' and q5== '18' and q6=='21' and q7=='29' and q8=='33':
+                messages.success(request, 'you are suffering from panic attack')
+                return redirect('result')
+            elif q1=='3' and q2== '5' and q3== '11' and q4 == '13' and q5== '20' and q6=='24' and q7=='28' and q8=='34':
+                messages.success(request, 'you are suffering from OCD')
+                return redirect('result')
+            elif q1=='4' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='40' and q7=='30' and q8=='32':
+                messages.success(request, 'you are suffering from stress')
+                return redirect('result')
+            else:
+                messages.success(request, 'you are suffering from deppression')
+                return redirect('result')
+    return render(request, 'quizform.html') 
+
+def result(request):
+    return render(request, 'result.html')  

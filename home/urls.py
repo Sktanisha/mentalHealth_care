@@ -9,4 +9,6 @@ urlpatterns = [
     path('view_profile', views.view_profile, name='view_profile'),
     path('edit_profile', views.edit_profile, name='edit_profile'),
     path('home', views.home, name='home'),
+    path('quizform', views.quizform, name='quizform'),
+    path('result', views.result, name='result'),
 ]
