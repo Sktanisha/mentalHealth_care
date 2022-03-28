@@ -93,11 +93,11 @@ def edit_profile(request):
             messages.success(
                 request, "User details updated successfully...!")
 
-            return redirect('editprofile')
+            return redirect('edit_profile')
     else:
         try:
             user = accounts.objects.get(email=request.session['email'])
-            return render(request, 'editprofile.html', {'user': user})
+            return render(request, 'edit_profile.html', {'user': user})
         except:
             messages.error(request, 'You need to login first')
             return redirect('login')
