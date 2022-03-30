@@ -26,6 +26,9 @@ def edit_profile(request):
 def home(request):
     return render(request, 'home.html')  
 
+def userindex(request):
+    return render(request, 'userindex.html') 
+
 
 def register(request):
     context = {}
@@ -55,7 +58,7 @@ def login(request):
             userInfo = accounts.objects.get(email=request.POST.get('email'))
             if (request.POST.get('password') == (userInfo.password)):
                 request.session['email'] = userInfo.email
-                return redirect('home')
+                return redirect('userindex')
             else:
                 messages.error(request, 'Incorrect Password...!')
         except accounts.DoesNotExist as e:
