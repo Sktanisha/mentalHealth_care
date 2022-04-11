@@ -9,19 +9,37 @@ from django.db import connection
 def index(request):
     return render(request, 'index.html')
 
-def login(request):
-    return render(request, 'login.html')
 
-def contact_form(request):
-    return render(request, 'contact_form.html')
+
 
 def view_profile(request):
     user = accounts.objects.get(email=request.session['email'])
     acc = accounts.objects.raw( 'SELECT * FROM users WHERE email = %s', [user.email] )
     return render(request, 'view_profile.html', {'acc': acc, 'user': user})
 
+
+
 def edit_profile(request):
-    return render(request, 'edit_profile.html')
+    if request.method == 'POST':
+        user = accounts.objects.get(email=request.session['email'])
+        if request.POST.get('editName') and request.POST.get('editAge') and request.POST.get('editMobile') and request.POST.get('editAddress'):
+
+            user.name = request.POST.get('editName')
+            user.age = request.POST.get('editAge')
+            user.mobile = request.POST.get('editMobile')
+            user.address = request.POST.get('editAddress')
+            user.save()
+            messages.success(
+                request, "User details updated successfully...!")
+
+            return redirect('edit_profile')
+    else:
+        try:
+            user = accounts.objects.get(email=request.session['email'])
+            return render(request, 'edit_profile.html', {'user': user})
+        except:
+            messages.error(request, 'You need to login first')
+            return redirect('login')
 
 def home(request):
     return render(request, 'home.html')  
@@ -83,8 +101,6 @@ def contact_form(request):
 def userindex(request):
     return render(request, 'userindex.html')
 
-def edit_profile(request):
-    return render(request, 'edit_profile.html')
 
 def search(request):
     return render(request, 'search.html')
@@ -119,19 +135,19 @@ def quizform(request):
             # print(q8)
             
             if q1=='1' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='37' and q7=='28' and q8=='32':
-                messages.success(request, 'you are suffering from anxiety')
+                messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called anxiety')
                 return redirect('result')
             elif q1=='2' and q2== '6' and q3== '10' and q4 == '14' and q5== '18' and q6=='21' and q7=='29' and q8=='33':
-                messages.success(request, 'you are suffering from panic attack')
+                messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called panic attack')
                 return redirect('result')
             elif q1=='3' and q2== '5' and q3== '11' and q4 == '13' and q5== '20' and q6=='24' and q7=='28' and q8=='34':
-                messages.success(request, 'you are suffering from OCD')
+                messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called OCD')
                 return redirect('result')
             elif q1=='4' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='40' and q7=='30' and q8=='32':
-                messages.success(request, 'you are suffering from stress')
+                messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called stress')
                 return redirect('result')
             else:
-                messages.success(request, 'you are suffering from deppression')
+                messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called Depression')
                 return redirect('result')
     return render(request, 'quizform.html') 
 

@@ -34,8 +34,13 @@ class msgs(models.Model):
     person_contact = models.IntegerField(max_length=11)
     msg = models.CharField(max_length=1000)
 
-# def filepath(request, filename):
-#     old_filename = filename
-#     timeNow = datetime.now().strftime('%Y%m%d%H:%M:%S')
-#     filename = "%s-%s" % (timeNow, old_filename)
-#     return os.path.join('uploads/', filename)
+class quizresult(models.Model):
+    name =  models.CharField(max_length=20)
+    result =  models.CharField(max_length=20)
+
+class psychiatrist(models.Model):
+    name =  models.CharField(max_length=20)
+    designation = models.CharField(max_length=30)
+    ps_email=models.EmailField(max_length=30)
+    ps_mobile = models.IntegerField(max_length=11)
+    created_at = models.DateTimeField(default=datetime.now)
