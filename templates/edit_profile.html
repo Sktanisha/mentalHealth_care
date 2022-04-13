@@ -13,18 +13,19 @@
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'editprofile/edit.css'%}">
 
-    <title>MentalHealth Care</title>
+    <title>Railway Booking</title>
 </head>
 <style>
 body{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background: linear-gradient(90deg, #f5f8fa, #23b5f8);
 }
 .emp-profile{
-    padding: 3%;
-    margin-top: 3%;
+    padding: 2%;
+    margin-top: 4%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
-    background: #fff;
+    background: rgb(247, 250, 249);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
     .avatar-xl img {
         width: 110px;
@@ -58,25 +59,22 @@ body{
         color: #153247;
         background-color: #eeeeee;
         background-clip: padding-box;
-        border: 1px solid #4672eb;
+        border: 1px solid #0a69b6;
         border-radius: 0.25rem;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 </style>
 
 <body>
-    <a href="{}"><i class='bx bx-chevron-left'></i><i class='bx bxs-home'></i></a>
+    
     <div class="container emp-profile">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8 mx-auto">              
                         <div class="row mt-5 align-items-center">
                             <div class="col-md-3 text-center mb-5">
                                 <div class="avatar avatar-xl">
-                                    <a href = "{% url 'add_picture' %}">
-                                         <img src="https://png.pngtree.com/png-clipart/20190629/original/pngtree-vector-edit-profile-icon-png-image_4102545.jpg" alt="..."
-                                        class="avatar-img rounded-circle" />
-                                    </a>
-                                   
+                                    <img src="https://assets.dryicons.com/uploads/icon/svg/1492/edit_profile.svg" alt="..."
+                                       >
                                 </div>
                             </div>
                             <div class="col">
@@ -97,25 +95,25 @@ body{
                         {% csrf_token %}
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputfirstname">Firstname</label>
+                                <label for="inputfirstname">Name</label>
                                 <input type="text" class="form-control" id="inputFirstName" placeholder="e.g: Alice Doe"
-                                    name="editFirstName" required value="{{user.fname}}">
+                                    name="editName" required value="{{user.name}}">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputlastname">Lastname</label>
-                                <input type="text" class="form-control" id="inputLastName" placeholder="e.g: Alice Doe"
-                                    name="editLastName" required value="{{user.lname}}">
+                                <label for="inputlastname">Age</label>
+                                <input type="text" class="form-control" id="inputLastName" placeholder="e.g: 22"
+                                    name="editAge" required value="{{user.age}}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputusername">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" placeholder="Alice [No space]"
-                                name="editUsername" required value="{{user.username}}">
+                            <label for="inputusername">Address</label>
+                            <input type="text" class="form-control" id="inputUsername" placeholder="48 Kulutola, Dhaka"
+                                name="editAddress" required value="{{user.address}}">
                         </div>
                         <div class="form-group">
-                            <label for="inputcontact">Contact</label>
+                            <label for="inputcontact">Mobile No.</label>
                             <input type="text" class="form-control" id="inputcontact" placeholder="e.g: 0175*******"
-                                name="editContact" required value="{{user.contact}}">
+                                name="editMobile" required value="{{user.mobile}}">
                         </div>
 
 
@@ -123,7 +121,7 @@ body{
                
                 
                     <!-- <input class="btn btn-info" type="submit" value="Save Changes"> -->
-                    <button type="submit" class="btn btn-outline-primary" name="editprofile" value="Save Changes">Update Profile</button>
+                    <button type="submit" class="btn btn-primary btn-block" name="editprofile" value="Save Changes">Update Profile</button>
         </form>
             </div>
         
