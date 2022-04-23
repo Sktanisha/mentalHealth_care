@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'channels',
+    
 ]
 
 MIDDLEWARE = [
@@ -79,7 +81,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mentalHealth_care.wsgi.application'
-
+ASGI_APPLICATION = 'mentalHealth_care.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

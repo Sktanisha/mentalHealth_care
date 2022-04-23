@@ -44,3 +44,7 @@ class psychiatrist(models.Model):
     ps_email=models.EmailField(max_length=30)
     ps_mobile = models.IntegerField(max_length=11)
     created_at = models.DateTimeField(default=datetime.now)
+
+class chat(models.Model):
+    room_name = models.CharField(max_length=255)
+    allowed_users = models.CharField(max_length=255)
