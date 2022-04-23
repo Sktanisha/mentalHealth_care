@@ -44,3 +44,8 @@ class psychiatrist(models.Model):
     ps_email=models.EmailField(max_length=30)
     ps_mobile = models.IntegerField(max_length=11)
     created_at = models.DateTimeField(default=datetime.now)
+
+class blogs(models.Model):
+    title = models.CharField(max_length=100)
+    blog_type = models.CharField(max_length=100)
+    blog = models.CharField(max_length=500)

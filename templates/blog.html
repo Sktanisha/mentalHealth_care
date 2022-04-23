@@ -1,0 +1,173 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <title>MentalHelth Care</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #057a8d;
+    margin: 0;
+    padding: 3em 1em;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    font-style: italic;
+    font-size: 0.8em;
+    color: grey;
+    line-height: 1.4;
+  }
+
+  .grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 90%;
+    grid-gap: 1em;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding: 2em 1em;
+    background: white;
+  }
+
+  @media all and (min-width: 600px) {
+    .grid {
+      grid-auto-flow: initial;
+      grid-template-columns: repeat(auto-fit, minmax(auto, 20em));
+      justify-content: center;
+    }
+  }
+
+  .grid__figure {
+    display: grid;
+    grid-template-rows: 15em 1fr;
+    grid-gap: 1em;
+  }
+
+  .grid__figure img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+  /* footer  */
+</style>
+
+<body>
+  <pre>
+        Please go through the blogs available in our website. These blogs are all written by professionals which contains no unnecessary Information.
+        If you see anything that triggers you please <a href="{% url 'contact_form' %}">contact us</a>
+        Thank You 
+        
+     </pre>
+  <ul class="grid">
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog1' %}"><img src="https://qph.cf2.quoracdn.net/main-qimg-f9a9db64060b095eff85cc6ded586487-lq"
+            alt="" style="width:250px;height:250px;"></a>
+        <figcaption>"Depression Does Not Mean Your Life Is over"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog2' %}"><img
+            src="https://images.prismic.io/cerebral/42857718-d8da-4e17-8a20-b8d1fdd31158_Panic%20Attacks.png?ixlib=gatsbyFP&auto=compress%2Cformat&fit=max&q=50&w=3420&h=1897"
+            alt="" style="width:250px; height:250px;"></a>
+        <figcaption>"Panic Attacks Are Just How You React to Stress"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog3' %}"><img
+            src="https://previews.123rf.com/images/saphatthachat/saphatthachat1706/saphatthachat170600154/80911658-vector-cartoon-family-issue-problem.jpg"
+            alt="" style="width:250px; height:250px;"></a>
+        <figcaption>"Families Can Be Painful Sometimes"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog4' %}"><img
+            src="https://www.elegantthemes.com/blog/wp-content/uploads/2018/12/featured-confidence.png" alt=""
+            style="width:250px; height:250px;"></a>
+        <figcaption>"Confidence Is The Key"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog5' %}"><img
+            src="data:image/jpeg;base64,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"
+            alt="" style="width:250px; height:250px;"></a>
+        <figcaption>"Deal With Stress"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog6' %}"><img
+            src="https://post.healthline.com/wp-content/uploads/2020/09/12334-When_You_Dont_Want_to_Be_Here_But_Youre_Too_Afraid_to_Die-732x549-Thumbnail-732x549.jpg"
+            alt="" style="width:250px; height:250px;"></a>
+        <figcaption>"Things That Kill You Slowly"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog7' %}"><img
+            src="https://content.thriveglobal.com/wp-content/uploads/2019/09/new-how-to-better-understand-yourself-via-character-survey-1.jpg?w=960"
+            alt="" style="width:250px; height:250px;"></a>
+        <figcaption>"Know Yourself"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="{% url 'blog8' %}"><img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_LXhUejaWsB18zbvmaPVgIvjue0xVfQ83Dw&usqp=CAU"
+            alt="" style="width:250px; height: 250px;"></a>
+        <figcaption>"Anxiety Is A Normal Human Response"</figcaption>
+      </figure>
+    </li>
+    <li>
+      <figure class="grid__figure">
+        <a href="d{% url 'blog9' %}"><img
+            src="https://static.toiimg.com/thumb/msid-83200901,width-1200,height-900,resizemode-4/.jpg" alt=""
+            style="width:250px; height:250px;"></a>
+        <figcaption>"Why Do You Need A Psychologist"</figcaption>
+      </figure>
+    </li>
+  </ul>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
