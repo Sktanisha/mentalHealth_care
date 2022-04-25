@@ -58,21 +58,21 @@ def docregister(request):
     context = {}
     if request.method == 'POST':
         if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid') and request.POST.get('type') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
-            saveRecord = docaccounts()
+            saveDoc = docaccounts()
 
-            saveRecord.doc_title = request.POST.get('title')
-            saveRecord.doc_name = request.POST.get('name')
-            saveRecord.doc_age = request.POST.get('age')
-            saveRecord.doc_gender = request.POST.get('gender')
-            saveRecord.doc_nid = request.POST.get('nid')
-            saveRecord.doc_type = request.POST.get('type')
-            saveRecord.doc_address = request.POST.get('address')
-            saveRecord.doc_password = request.POST.get('password')
-            saveRecord.doc_email = request.POST.get('email')
-            saveRecord.doc_mobile = request.POST.get('mobile')
-            saveRecord.doc_birth = request.POST.get('birth')
+            saveDoc.doc_title = request.POST.get('title')
+            saveDoc.doc_name = request.POST.get('name')
+            saveDoc.doc_age = request.POST.get('age')
+            saveDoc.doc_gender = request.POST.get('gender')
+            saveDoc.doc_nid = request.POST.get('nid')
+            saveDoc.doc_type = request.POST.get('type')
+            saveDoc.doc_address = request.POST.get('address')
+            saveDoc.doc_password = request.POST.get('password')
+            saveDoc.doc_email = request.POST.get('email')
+            saveDoc.doc_mobile = request.POST.get('mobile')
+            saveDoc.doc_birth = request.POST.get('birth')
    
-            saveRecord.save()
+            saveDoc.save()
             messages.success(request, 'Acccount Created Successsfully')
             return render(request, 'docregister.html', context)
 
