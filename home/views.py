@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from home.models import  accounts, msgs
+from home.models import  accounts, msgs, docaccounts
 from django.contrib import messages
 from django.db import connection
 
@@ -29,6 +29,9 @@ def home(request):
 def userindex(request):
     return render(request, 'userindex.html') 
 
+def docregister(request):
+    return render(request, 'docregister.html') 
+
 
 def register(request):
     context = {}
@@ -49,6 +52,32 @@ def register(request):
 
     else:
         return render(request, 'register.html', context)
+
+
+def docregister(request):
+    context = {}
+    if request.method == 'POST':
+        if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid') and request.POST.get('type') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
+            saveRecord = docaccounts()
+
+            saveRecord.doc_title = request.POST.get('title')
+            saveRecord.doc_name = request.POST.get('name')
+            saveRecord.doc_age = request.POST.get('age')
+            saveRecord.doc_gender = request.POST.get('gender')
+            saveRecord.doc_nid = request.POST.get('nid')
+            saveRecord.doc_type = request.POST.get('type')
+            saveRecord.doc_address = request.POST.get('address')
+            saveRecord.doc_password = request.POST.get('password')
+            saveRecord.doc_email = request.POST.get('email')
+            saveRecord.doc_mobile = request.POST.get('mobile')
+            saveRecord.doc_birth = request.POST.get('birth')
+   
+            saveRecord.save()
+            messages.success(request, 'Acccount Created Successsfully')
+            return render(request, 'docregister.html', context)
+
+    else:
+        return render(request, 'docregister.html', context)
 
 
 def login(request):

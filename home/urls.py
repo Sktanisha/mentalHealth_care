@@ -12,4 +12,5 @@ urlpatterns = [
     path('userindex', views.userindex, name='userindex'),
     path('quizform', views.quizform, name='quizform'),
     path('result', views.result, name='result'),
+    path('docregister', views.docregister, name='docregister'),
 ]
