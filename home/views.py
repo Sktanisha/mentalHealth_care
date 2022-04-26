@@ -97,7 +97,7 @@ def login(request):
             userInfo = accounts.objects.get(email=request.POST.get('email'))
             if (request.POST.get('password') == (userInfo.password)):
                 request.session['email'] = userInfo.email
-                return redirect('home')
+                return redirect('userindex')
             else:
                 messages.error(request, 'Incorrect Password...!')
         except accounts.DoesNotExist as e:
@@ -196,3 +196,32 @@ def information(request):
 
 def video(request,room,created):
     return render (request,'video.html',{'created':created, 'room':room})
+def blog(request):
+    return render(request, 'blog.html')
+
+def blog1(request):
+    return render(request, 'blog1.html')
+
+def blog2(request):
+    return render(request, 'blog2.html')
+
+def blog3(request):
+    return render(request, 'blog3.html')
+
+def blog4(request):
+    return render(request, 'blog4.html')
+
+def blog5(request):
+    return render(request, 'blog5.html')
+
+def blog6(request):
+    return render(request, 'blog6.html')
+
+def blog7(request):
+    return render(request, 'blog7.html')
+
+def blog8(request):
+    return render(request, 'blog8.html')
+
+def blog9(request):
+    return render(request, 'blog9.html')
