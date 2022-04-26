@@ -48,3 +48,18 @@ class psychiatrist(models.Model):
 class chat(models.Model):
     room_name = models.CharField(max_length=255)
     allowed_users = models.CharField(max_length=255)
+
+class docaccounts(models.Model):
+    doc_title =  models.CharField(max_length = 20)
+    doc_name = models.CharField(max_length = 20)
+    doc_age = models.IntegerField(max_length=3)
+    doc_gender = models.CharField(max_length = 20)
+    doc_nid = models.IntegerField(max_length=17)
+    doc_address = models.CharField(max_length = 100)
+    doc_birth = models.DateField()
+    doc_mobile = models.IntegerField(max_length=11)
+    doc_email=models.EmailField(max_length=30)
+    doc_password = models.CharField(max_length = 20)
+    doc_confirm_password = models.CharField(max_length = 20)
+    created_at = models.DateTimeField(default=datetime.now)
+    

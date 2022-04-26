@@ -11,7 +11,16 @@
     <title>Info</title>
   </head>
   <body>
+    <h1 class="text-primary text-center">Start video call</h1>
+    <form class="container" method="POST" action="">
+      {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Room Name</label>
+    <input type="text" class="form-control" name="room" id="room" aria-describedby="emailHelp">
+  </div>
   
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

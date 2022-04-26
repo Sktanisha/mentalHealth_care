@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from home.models import  accounts, msgs,chat
+from home.models import  accounts, msgs,chat,docaccounts
 from django.contrib import messages
 from django.db import connection
 
@@ -64,6 +64,30 @@ def register(request):
 
     else:
         return render(request, 'register.html', context)
+
+def docregister(request):
+    context = {}
+    if request.method == 'POST':
+        if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid')  and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
+            saveDoc = docaccounts()
+
+            saveDoc.doc_title = request.POST.get('title')
+            saveDoc.doc_name = request.POST.get('name')
+            saveDoc.doc_age = request.POST.get('age')
+            saveDoc.doc_gender = request.POST.get('gender')
+            saveDoc.doc_nid = request.POST.get('nid')
+            saveDoc.doc_address = request.POST.get('address')
+            saveDoc.doc_password = request.POST.get('password')
+            saveDoc.doc_email = request.POST.get('email')
+            saveDoc.doc_mobile = request.POST.get('mobile')
+            saveDoc.doc_birth = request.POST.get('birth')
+   
+            saveDoc.save()
+            messages.success(request, 'Acccount Created Successsfully')
+            return render(request, 'docregister.html', context)
+
+    else:
+        return render(request, 'docregister.html', context)
 
 
 def login(request):
@@ -168,7 +192,7 @@ def information(request):
             create = chat.objects.create(room_name=room,allowed_users=1)
             if create:
                 return redirect(f'/video/{room}/created/')
-    return render(request,'index.html')
+    return render(request,'information.html')
 
 def video(request,room,created):
     return render (request,'video.html',{'created':created, 'room':room})

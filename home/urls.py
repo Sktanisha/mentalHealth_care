@@ -15,5 +15,7 @@ urlpatterns = [
     path('doctorslist', views.doctorslist, name='doctors_list'),
     path('quizform', views.quizform, name='quizform'),
     path('result', views.result, name='result'),
+    path('information', views.information, name='information'),
     path('video/<str:room>/<str:created>/',views.video,name='video'),
+    path('docregister', views.docregister, name='docregister'),
 ]

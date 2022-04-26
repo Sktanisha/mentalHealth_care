@@ -7,6 +7,7 @@ class mentalHealth_care(AsyncJsonWebsocketConsumer):
     async def receive_json(self, content):
         if(content['command'] == 'join_room'):
             await self.channel_layer.group_add(content['room'],self.channel_name)
+            print('added')
         elif(content['command'] == 'join'):
             await self.channel_layer.group_send(content['room'],{
                 'type':'join.message',
