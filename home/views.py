@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from home.models import  accounts, msgs,chat,docaccounts
+from home.models import  accounts, msgs,chat,docaccounts,quizresult
 from django.contrib import messages
 from django.db import connection
 
@@ -135,6 +135,8 @@ def quizform(request):
     if request.method == 'POST':
         #  if request.POST.get('ques1') and request.POST.get('ques2') and request.POST.get('ques3') and request.POST.get('ques4') and request.POST.get('ques5') and request.POST.get('ques6') and request.POST.get('ques7') and request.POST.get('ques8') :
             # print("hii")
+            save = quizresult()
+            save.name = request.POST.get('email')
             q1= request.POST.get('ques1')
             
             q2= request.POST.get('ques2')
@@ -159,20 +161,28 @@ def quizform(request):
             # print(q8)
             
             if q1=='1' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='37' and q7=='28' and q8=='32':
+                save.result = 'anxiety'
                 messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called anxiety')
+                
                 return redirect('result')
             elif q1=='2' and q2== '6' and q3== '10' and q4 == '14' and q5== '18' and q6=='21' and q7=='29' and q8=='33':
                 messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called panic attack')
+                save.result = 'panic attack'
                 return redirect('result')
             elif q1=='3' and q2== '5' and q3== '11' and q4 == '13' and q5== '20' and q6=='24' and q7=='28' and q8=='34':
                 messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called OCD')
+                save.result = 'OCD'
                 return redirect('result')
             elif q1=='4' and q2== '5' and q3== '9' and q4 == '13' and q5== '17' and q6=='40' and q7=='30' and q8=='32':
                 messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called stress')
+                save.result = 'stress'
                 return redirect('result')
             else:
                 messages.success(request, 'You Are Facing A Minor Inconvenience. In Medical Terms It Is called Depression')
+                save.result = 'depression'
                 return redirect('result')
+
+            
     return render(request, 'quizform.html') 
 
 def result(request):
