@@ -1,4 +1,5 @@
 from turtle import title
+from unicodedata import name
 from django.db import models
 from datetime import datetime
 import os
@@ -35,8 +36,6 @@ class msgs(models.Model):
     person_contact = models.IntegerField(max_length=11)
     msg = models.CharField(max_length=1000)
 
-    class Meta:
-        db_table = 'contuct_massage'
 
 class docaccounts(models.Model):
     doc_title =  models.CharField(max_length = 20)
@@ -44,7 +43,6 @@ class docaccounts(models.Model):
     doc_age = models.IntegerField(max_length=3)
     doc_gender = models.CharField(max_length = 20)
     doc_nid = models.IntegerField(max_length=17)
-    doc_type = models.CharField(max_length = 20)
     doc_address = models.CharField(max_length = 100)
     doc_birth = models.DateField()
     doc_mobile = models.IntegerField(max_length=11)
@@ -53,8 +51,7 @@ class docaccounts(models.Model):
     doc_confirm_password = models.CharField(max_length = 20)
     created_at = models.DateTimeField(default=datetime.now)
     
-    class meta:
-        db_table = 'doctors'
+
     
-    
+   
     

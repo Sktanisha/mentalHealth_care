@@ -13,4 +13,5 @@ urlpatterns = [
     path('quizform', views.quizform, name='quizform'),
     path('result', views.result, name='result'),
     path('docregister', views.docregister, name='docregister'),
+    path('feedback', views.feedback, name='feedback'),
 ]

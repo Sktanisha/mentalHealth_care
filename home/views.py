@@ -32,6 +32,9 @@ def userindex(request):
 def docregister(request):
     return render(request, 'docregister.html') 
 
+def feedback(request):
+    return render(request, 'feedback.html') 
+
 
 def register(request):
     context = {}
@@ -57,7 +60,7 @@ def register(request):
 def docregister(request):
     context = {}
     if request.method == 'POST':
-        if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid') and request.POST.get('type') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
+        if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
             saveDoc = docaccounts()
 
             saveDoc.doc_title = request.POST.get('title')
@@ -65,7 +68,6 @@ def docregister(request):
             saveDoc.doc_age = request.POST.get('age')
             saveDoc.doc_gender = request.POST.get('gender')
             saveDoc.doc_nid = request.POST.get('nid')
-            saveDoc.doc_type = request.POST.get('type')
             saveDoc.doc_address = request.POST.get('address')
             saveDoc.doc_password = request.POST.get('password')
             saveDoc.doc_email = request.POST.get('email')
