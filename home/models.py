@@ -51,7 +51,16 @@ class docaccounts(models.Model):
     doc_confirm_password = models.CharField(max_length = 20)
     created_at = models.DateTimeField(default=datetime.now)
     
+class Profile(models.Model):
+    user = models.OneToOneField(accounts, on_delete=models.CASCADE)
+    forget_password_token = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        db_table = 'profile_tokens'
+
+    def __str__(self):
+        return self.user.email
     
    
     

@@ -14,4 +14,6 @@ urlpatterns = [
     path('result', views.result, name='result'),
     path('docregister', views.docregister, name='docregister'),
     path('feedback', views.feedback, name='feedback'),
+	path('reset-password', views.reset_password, name='reset-password'),
+    path('change-password/<token>/', views.change_password, name='change-password'),
 ]
