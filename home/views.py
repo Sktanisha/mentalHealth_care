@@ -1,9 +1,14 @@
 # from django.shortcuts import render
+import profile
+import uuid
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from home.models import  accounts, msgs,chat,docaccounts,quizresult
+from home.models import  Profile, accounts, msgs, docaccounts
 from django.contrib import messages
 from django.db import connection
+
+from mentalHealth_care.helpers import send_forget_password_mail
 
 # Create your views here.
 def index(request):
@@ -44,12 +49,22 @@ def edit_profile(request):
 def home(request):
     return render(request, 'home.html')  
 
+def userindex(request):
+    return render(request, 'userindex.html') 
+
+def docregister(request):
+    return render(request, 'docregister.html') 
+
+def feedback(request):
+    return render(request, 'feedback.html') 
+
 
 def register(request):
     context = {}
     if request.method == 'POST':
         if request.POST.get('name') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
             saveRecord = accounts()
+            saveToken = Profile()
 
             saveRecord.name = request.POST.get('name')
             saveRecord.age = request.POST.get('age')
@@ -59,6 +74,8 @@ def register(request):
             saveRecord.mobile = request.POST.get('mobile')
    
             saveRecord.save()
+            saveToken.user = saveRecord
+            saveToken.save()
             messages.success(request, 'Acccount Created Successsfully')
             return render(request, 'register.html', context)
 
@@ -69,6 +86,31 @@ def docregister(request):
     context = {}
     if request.method == 'POST':
         if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid')  and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
+            saveDoc = docaccounts()
+
+            saveDoc.doc_title = request.POST.get('title')
+            saveDoc.doc_name = request.POST.get('name')
+            saveDoc.doc_age = request.POST.get('age')
+            saveDoc.doc_gender = request.POST.get('gender')
+            saveDoc.doc_nid = request.POST.get('nid')
+            saveDoc.doc_address = request.POST.get('address')
+            saveDoc.doc_password = request.POST.get('password')
+            saveDoc.doc_email = request.POST.get('email')
+            saveDoc.doc_mobile = request.POST.get('mobile')
+            saveDoc.doc_birth = request.POST.get('birth')
+   
+            saveDoc.save()
+            messages.success(request, 'Acccount Created Successsfully')
+            return render(request, 'docregister.html', context)
+
+    else:
+        return render(request, 'docregister.html', context)
+
+
+def docregister(request):
+    context = {}
+    if request.method == 'POST':
+        if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
             saveDoc = docaccounts()
 
             saveDoc.doc_title = request.POST.get('title')
@@ -125,12 +167,28 @@ def contact_form(request):
 def userindex(request):
     return render(request, 'userindex.html')
 
+def edit_profile(request):
+    if request.method == 'POST':
+        user = accounts.objects.get(email=request.session['email'])
+        if request.POST.get('editName') and request.POST.get('editAge') and request.POST.get('editMobile') and request.POST.get('editAddress'):
 
-def search(request):
-    return render(request, 'search.html')
+            user.name = request.POST.get('editName')
+            user.age = request.POST.get('editAge')
+            user.mobile = request.POST.get('editMobile')
+            user.address = request.POST.get('editAddress')
+            user.save()
+            messages.success(
+                request, "User details updated successfully...!")
 
-def doctorslist(request):
-    return render(request, 'doctorslist.html')
+            return redirect('edit_profile')
+    else:
+        try:
+            user = accounts.objects.get(email=request.session['email'])
+            return render(request, 'edit_profile.html', {'user': user})
+        except:
+            messages.error(request, 'You need to login first')
+            return redirect('login')
+
 def quizform(request):
     if request.method == 'POST':
         #  if request.POST.get('ques1') and request.POST.get('ques2') and request.POST.get('ques3') and request.POST.get('ques4') and request.POST.get('ques5') and request.POST.get('ques6') and request.POST.get('ques7') and request.POST.get('ques8') :
@@ -235,3 +293,53 @@ def blog8(request):
 
 def blog9(request):
     return render(request, 'blog9.html')
+def reset_password(request):
+    try:
+        if request.method == 'POST' and request.POST.get('resetEmail'):
+            email = request.POST.get('resetEmail')
+
+        if not accounts.objects.filter(email=email).first():
+            # messages.error(request, 'No user found with this email.')
+            return HttpResponse("No user found with this email.")
+
+        user_obj = accounts.objects.get(email=email)
+        token = str(uuid.uuid4())
+        profile_obj = Profile.objects.get(user=user_obj.id)
+        profile_obj.forget_password_token = token
+        profile_obj.save()
+        send_forget_password_mail(user_obj.email, token)
+        return HttpResponse("An email is sent.")
+
+    except Exception as e:
+        print(e)
+        return render(request, 'reset_password/forget-password.html')
+
+def change_password(request, token):
+    context = {}
+
+    try:
+        profile_obj = profile.objects.filter(
+            forget_password_token=token).first()
+        context = {'user_id': profile_obj.user.id}
+
+        if request.method == 'POST':
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('reconfirm_password')
+            user_id = request.POST.get('user_id')
+
+            if user_id is None:
+                return HttpResponse("No user id found.")
+
+            if new_password != confirm_password:
+                return HttpResponse("Booth password should be equal")
+
+            user_obj = accounts.objects.filter(id=user_id).first()
+            user_obj.password = new_password
+            user_obj.save()
+            return HttpResponse("Password updated successfully!!")
+        else:
+            return render(request, 'reset_password/change-password.html', context)
+
+    except Exception as e:
+        print(e)
+        return HttpResponse("url has already been used.")

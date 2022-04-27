@@ -1,3 +1,5 @@
+from turtle import title
+from unicodedata import name
 from django.db import models
 from datetime import datetime
 import os
@@ -67,3 +69,16 @@ class blogs(models.Model):
     title = models.CharField(max_length=100)
     blog_type = models.CharField(max_length=100)
     blog = models.CharField(max_length=500)
+class Profile(models.Model):
+    user = models.OneToOneField(accounts, on_delete=models.CASCADE)
+    forget_password_token = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'profile_tokens'
+
+    def __str__(self):
+        return self.user.email
+    
+   
+    
