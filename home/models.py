@@ -48,4 +48,4 @@ class psychiatrist(models.Model):
 class blogs(models.Model):
     title = models.CharField(max_length=100)
     blog_type = models.CharField(max_length=100)
-    blog = models.CharField(max_length=500)
+    blog = models.CharField(max_length=2000)

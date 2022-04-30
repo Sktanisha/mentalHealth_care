@@ -183,3 +183,6 @@ def blog8(request):
 
 def blog9(request):
     return render(request, 'blog9.html')
+
+def doctorprofile(request):
+    return render(request, 'doctorprofile.html')

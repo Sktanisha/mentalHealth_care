@@ -22,4 +22,5 @@ urlpatterns = [
     path('blog7', views.blog7, name='blog7'),
     path('blog8', views.blog8, name='blog8'),
     path('blog9', views.blog9, name='blog9'),
+     path('doctorprofile', views.doctorprofile, name='doctorprofile'),
 ]
