@@ -1,5 +1,3 @@
-from turtle import title
-from unicodedata import name
 from django.db import models
 from datetime import datetime
 import os
@@ -18,6 +16,7 @@ class accounts(models.Model):
     mobile = models.IntegerField(max_length=11)
     email=models.EmailField(max_length=30)
     password = models.CharField(max_length = 20)
+    role = models.CharField(max_length = 20)
     confirm_password = models.CharField(max_length = 20)
     image = models.ImageField(upload_to=filepath, null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.now)
@@ -29,6 +28,18 @@ class accounts(models.Model):
         if accounts.objects.filter(email=self.email):
             return True
         return False
+
+class Profile(models.Model):
+    user = models.OneToOneField(accounts, on_delete=models.CASCADE)
+    forget_password_token = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'profile_tokens'
+
+    def __str__(self):
+        return self.user.email
+
 
 class msgs(models.Model):
     person_name = models.CharField(max_length=20)
@@ -51,6 +62,10 @@ class chat(models.Model):
     room_name = models.CharField(max_length=255)
     allowed_users = models.CharField(max_length=255)
 
+class call(models.Model):
+    email = models.CharField(max_length=20)
+    room = models.CharField(max_length=255)
+
 class docaccounts(models.Model):
     doc_title =  models.CharField(max_length = 20)
     doc_name = models.CharField(max_length = 20)
@@ -68,17 +83,4 @@ class docaccounts(models.Model):
 class blogs(models.Model):
     title = models.CharField(max_length=100)
     blog_type = models.CharField(max_length=100)
-    blog = models.CharField(max_length=500)
-class Profile(models.Model):
-    user = models.OneToOneField(accounts, on_delete=models.CASCADE)
-    forget_password_token = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        db_table = 'profile_tokens'
-
-    def __str__(self):
-        return self.user.email
-    
-   
-    
+    blog = models.CharField(max_length=500) 

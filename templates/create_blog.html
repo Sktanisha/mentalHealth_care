@@ -105,7 +105,7 @@ form label.floatLabel {
   <body>
     <form method="post">
       {% csrf_token %}
-        <h2>Register Form</h2>
+        <h2>Create Blog</h2>
         {% if messages %}
         {% for result in messages %}
         {% if result.tags == "error" %}
@@ -120,44 +120,20 @@ form label.floatLabel {
         {% endfor %}
         {% endif %}
           <p>
-            <label for="Name" class="floatLabel">Name</label>
-            <input id="name" name="name" type="text" required>
+            <label for="Title" class="floatLabel">Title</label>
+            <input id="title" name="title" type="text" required>
           </p>
           <p>
-            <label for="Age" class="floatLabel">Age</label>
-            <input id="age" name="age" type="text" required>
+            <label for="Blog Type" class="floatLabel">Blog Type</label>
+            <input id="blog_type" name="blog_type" type="text" required>
           </p>
           <p>
-            <label for="Address" class="floatLabel">Address</label>
-            <input id="address" name="address" type="text" required>
+            <label for="Blog" class="floatLabel">Blog</label>
+            <input id="blog" name="blog" type="text" required>
           </p>
+         
           <p>
-            <label for="Mobile" class="floatLabel">Mobile No.</label>
-            <input id="mobile" name="mobile" type="text" required>
-          </p>
-          <p>
-            <label for="Email" class="floatLabel">Email</label>
-            <input id="email" name="email" type="text" required>
-          </p>
-          <p>
-            <label for="password" class="floatLabel">Password</label>
-            <input id="password" name="password" type="password" required>
-          </p>
-          <p>
-            <label for="confirm_password" class="floatLabel">Confirm Password</label>
-            <input id="confirm_password" name="confirm_password" type="password" required>
-          </p>
-          <div class="form-group">
-            <label for="Role" class="col-sm-3 control-label"></label>
-            <div class="col-sm-9">
-                <select id="role" name="role" class="form-control">
-                    <option>Paitent</option>
-                    <option>Doctor</option>
-                </select>
-            </div>
-        </div>
-          <p>
-            <input type="submit" value="Create My Account" id="submit">
+            <input type="submit" value="Create Blog" id="submit">
           </p>
         </form>
     

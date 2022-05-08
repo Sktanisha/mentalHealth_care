@@ -83,14 +83,25 @@
         
      </pre>
   <ul class="grid">
+    <form class="post-form" action="" method="POST" id="showtrain_form">
+      {% csrf_token %}
+      {% for show in blog %}
     <li>
       <figure class="grid__figure">
-        <a href="{% url 'blog1' %}"><img src="https://qph.cf2.quoracdn.net/main-qimg-f9a9db64060b095eff85cc6ded586487-lq"
-            alt="" style="width:250px;height:250px;"></a>
-        <figcaption>"Depression Does Not Mean Your Life Is over"</figcaption>
+        <button
+          type="button"
+          class="button"
+          onclick="location.href='/blog1/{{show.0}}/'"
+        >
+          SEE BLOG {{show.0}}
+        </button>
+        <figcaption>Title: "{{show.1}}"</figcaption>
+        <br>
+        <br>
       </figure>
     </li>
-    <li>
+    {% endfor %}
+    <!-- <li>
       <figure class="grid__figure">
         <a href="{% url 'blog2' %}"><img
             src="https://images.prismic.io/cerebral/42857718-d8da-4e17-8a20-b8d1fdd31158_Panic%20Attacks.png?ixlib=gatsbyFP&auto=compress%2Cformat&fit=max&q=50&w=3420&h=1897"
@@ -153,7 +164,8 @@
             style="width:250px; height:250px;"></a>
         <figcaption>"Why Do You Need A Psychologist"</figcaption>
       </figure>
-    </li>
+    </li> -->
+    </form>
   </ul>
 
   <!-- Optional JavaScript; choose one of the two! -->

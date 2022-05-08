@@ -72,98 +72,32 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
+        <form class="post-form" action="" method="POST" id="showtrain_form">
+          {% csrf_token %}
+          {% for show in ticket %}
         <!-- PAGE TITLE -->
+        <h1>BLOG {{show.0}}</h1>
         <h3 class="page__title my-3 text-center">
-          <i>Depression Does Not Mean Your Life Is over &shy;</i>
+          <i>{{show.1}} &shy;</i>
         </h3>
 
         <!-- BLOCKQUOTE -->
         <blockquote class="blockquote">
           <p class="mb-0">
-          <p><strong>What Is Depression?</strong></p>
-          <p>Depression is a common and serious medical illness that negatively affects how you feel, the way you think
-            and how you act. Fortunately, it is also treatable. Depression causes feelings of sadness and/or a loss of
-            interest in activities you once enjoyed. It can lead to a variety of emotional and physical problems and can
-            decrease your ability to function at work and at home..</p>
-          <p><strong>What Are The Symptoms Of Depression?</strong></p>
-          <p>Depression symptoms can vary from mild to severe and can include:
-          <ul>
-            <li>Feeling sad or having a depressed mood</li>
-            <li>Loss of interest or pleasure in activities once enjoyed</li>
-            <li>Changes in appetite — weight loss or gain unrelated to dieting</li>
-            <li>Trouble sleeping or sleeping too much</li>
-            <li>Loss of energy or increased fatigue</li>
-            <li>Increase in purposeless physical activity (e.g., inability to sit still, pacing, handwringing) or slowed
-              movements or speech (these actions must be severe enough to be observable by others)</li>
-            <li>Feeling worthless or guilty</li>
-            <li>Difficulty thinking, concentrating or making decisions</li>
-            <li>Thoughts of death or suicide</li>
-          </ul>
-          </p>
-          <p>Depression affects an estimated one in 15 adults (6.7%) in any given year.
-            And one in six people (16.6%) will experience depression at some time in their life. 
-            Depression can occur at any time, but on average, first appears during the late teens to mid-20s. 
-            Women are more likely than men to experience depression. Some studies show that one-third of women will experience a major depressive episode in their lifetime. 
-            There is a high degree of heritability (approximately 40%) when first-degree relatives (parents/children/siblings) have depression.</p>
-          <p><strong>Risk Factors Of Depression</strong></p>
-          <p>Several factors can play a role in depression:
-            <ul>
-              <li>Biochemistry: Differences in certain chemicals in the brain may contribute to symptoms of depression.</li>
-              <li>Genetics: Depression can run in families. For example, if one identical twin has depression, the other has a 70 percent chance of having the illness sometime in life.</li>
-              <li>Personality: People with low self-esteem, who are easily overwhelmed by stress, or who are generally pessimistic appear to be more likely to experience depression.</li>
-              <li>Environmental factors: Continuous exposure to violence, neglect, abuse or poverty may make some people more vulnerable to depression.</li>
-            </ul>
-          </p>
-          <p><strong>How Is Depression Treated?</strong></p>
-          <p>Depression is among the most treatable of mental disorders. 
-            Between 80% and 90% percent of people with depression eventually respond well to treatment. 
-            Almost all patients gain some relief from their symptoms. </p>            
-            <p>Before a diagnosis or treatment, a health professional should conduct a thorough diagnostic evaluation, including an interview and a physical examination. 
-            In some cases, a blood test might be done to make sure the depression is not due to a medical condition like a thyroid problem or a vitamin deficiency (reversing the medical cause would alleviate the depression-like symptoms). 
-            The evaluation will identify specific symptoms and explore medical and family histories as well as cultural and environmental factors with the goal of arriving at a diagnosis and planning a course of action.
+          <p><strong>{{show.2}}</strong></p>
+          
+            <p><strong>{{show.3}}</strong></p>
+            <p>
+              
             </p>
-            <p><strong>Medication</strong></p>
-            <p>Brain chemistry may contribute to an individual’s depression and may factor into their treatment. 
-              For this reason, antidepressants might be prescribed to help modify one’s brain chemistry. 
-              These medications are not sedatives, “uppers” or tranquilizers. They are not habit-forming. 
-              Generally antidepressant medications have no stimulating effect on people not experiencing depression.</p>
 
-            <p>Antidepressants may produce some improvement within the first week or two of use yet full benefits may not be seen for two to three months. 
-              If a patient feels little or no improvement after several weeks, his or her psychiatrist can alter the dose of the medication or add or substitute another antidepressant. 
-              In some situations other psychotropic medications may be helpful. It is important to let your doctor know if a medication does not work or if you experience side effects.</p>
-
-            <p>Psychiatrists usually recommend that patients continue to take medication for six or more months after the symptoms have improved. 
-              Longer-term maintenance treatment may be suggested to decrease the risk of future episodes for certain people at high risk.</p>
-
-            <p><strong>Psychotherapy</strong></p>
-            <p>Psychotherapy, or “talk therapy,” is sometimes used alone for treatment of mild depression; for moderate to severe depression, psychotherapy is often used along with antidepressant medications. 
-              Cognitive behavioral therapy (CBT) has been found to be effective in treating depression. CBT is a form of therapy focused on the problem solving in the present. 
-              CBT helps a person to recognize distorted/negative thinking with the goal of changing thoughts and behaviors to respond to challenges in a more positive manner.</p>
-
-            <p>Psychotherapy may involve only the individual, but it can include others. 
-              For example, family or couples therapy can help address issues within these close relationships. 
-              Group therapy brings people with similar illnesses together in a supportive environment, and can assist the participant to learn how others cope in similar situations.</p>
-
-            <p>Depending on the severity of the depression, treatment can take a few weeks or much longer. In many cases, significant improvement can be made in 10 to 15 sessions.</p>
-
-            <p><strong>Electroconvulsive Therapy (ECT)</strong></p>
-            <p>ECT is a medical treatment that has been most commonly reserved for patients with severe major depression who have not responded to other treatments. 
-              It involves a brief electrical stimulation of the brain while the patient is under anesthesia. A patient typically receives ECT two to three times a week for a total of six to 12 treatments. 
-              It is usually managed by a team of trained medical professionals including a psychiatrist, an anesthesiologist and a nurse or physician assistant. 
-              ECT has been used since the 1940s, and many years of research have led to major improvements and the recognition of its effectiveness as a mainstream rather than a "last resort" treatment.</p>
-
-            <p><strong>Self-help and Coping</strong></p>
-            <p>There are a number of things people can do to help reduce the symptoms of depression. 
-              For many people, regular exercise helps create positive feeling and improves mood. 
-              Getting enough quality sleep on a regular basis, eating a healthy diet and avoiding alcohol (a depressant) can also help reduce symptoms of depression.</p>
-
-            <p>Depression is a real illness and help is available. With proper diagnosis and treatment, the vast majority of people with depression will overcome it. 
-              If you are experiencing symptoms of depression, a first step is to see your family physician or psychiatrist. Talk about your concerns and request a thorough evaluation. 
-              This is a start to addressing your mental health needs.</p>
+          </p>
           <!-- <footer class="blockquote-footer">
             Steve Jobs <cite title="Source Title">Source Title</cite>
           </footer> -->
         </blockquote>
+        {% endfor %}
+        </form>
       </div>
     </div>
   </div>

@@ -1,10 +1,8 @@
 # from django.shortcuts import render
-import profile
 import uuid
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from home.models import  accounts, msgs,chat,docaccounts,quizresult
-from home.models import  Profile, accounts, msgs, docaccounts
+from home.models import  accounts, msgs,chat,docaccounts,quizresult, Profile,blogs,call
 from django.contrib import messages
 from django.db import connection
 
@@ -34,9 +32,6 @@ def edit_profile(request):
             user.mobile = request.POST.get('editMobile')
             user.address = request.POST.get('editAddress')
             user.save()
-            messages.success(
-                request, "User details updated successfully...!")
-
             return redirect('edit_profile')
     else:
         try:
@@ -49,20 +44,11 @@ def edit_profile(request):
 def home(request):
     return render(request, 'home.html')  
 
-def userindex(request):
-    return render(request, 'userindex.html') 
-
-def docregister(request):
-    return render(request, 'docregister.html') 
-
-def feedback(request):
-    return render(request, 'feedback.html') 
-
 
 def register(request):
     context = {}
     if request.method == 'POST':
-        if request.POST.get('name') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
+        if request.POST.get('name') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile') and request.POST.get('role'):
             saveRecord = accounts()
             saveToken = Profile()
 
@@ -70,9 +56,10 @@ def register(request):
             saveRecord.age = request.POST.get('age')
             saveRecord.address = request.POST.get('address')
             saveRecord.password = request.POST.get('password')
+            saveRecord.role = request.POST.get('role')
             saveRecord.email = request.POST.get('email')
             saveRecord.mobile = request.POST.get('mobile')
-   
+            
             saveRecord.save()
             saveToken.user = saveRecord
             saveToken.save()
@@ -82,35 +69,67 @@ def register(request):
     else:
         return render(request, 'register.html', context)
 
+def reset_password(request):
+    try:
+        if request.method == 'POST' and request.POST.get('resetEmail'):
+            email = request.POST.get('resetEmail')
+
+        if not accounts.objects.filter(email=email).first():
+            messages.error(request, 'No user found with this email.')
+            return render(request, 'reset_password/forget-password.html')
+
+        user_obj = accounts.objects.get(email=email)
+        token = str(uuid.uuid4())
+        profile_obj = Profile.objects.get(user=user_obj.id)
+        profile_obj.forget_password_token = token
+        profile_obj.save()
+        send_forget_password_mail(user_obj.email, token)
+        messages.success(request, 'An email is sent.')
+        return render(request, 'reset_password/forget-password.html')
+
+    except Exception as e:
+        print(e)
+    return render(request, 'reset_password/forget-password.html')
+
+
+def change_password(request, token):
+    context = {}
+
+    try:
+        profile_obj = Profile.objects.filter(
+            forget_password_token=token).first()
+        context = {'user_id': profile_obj.user.id}
+
+        if request.method == 'POST':
+            new_password = request.POST.get('new_password')
+            confirm_password = request.POST.get('reconfirm_password')
+            user_id = request.POST.get('user_id')
+
+            if user_id is None:
+                messages.error(request, 'No user id found.')
+                return render(request, f'reset_password/change-password/{token}/.html', context)
+
+            if new_password != confirm_password:
+                messages.error(request, 'both should  be equal.')
+                return render(request, f'reset_password/change-password/{token}/.html', context)
+
+            user_obj = accounts.objects.filter(id=user_id).first()
+            user_obj.password = new_password
+            user_obj.save()
+            messages.success(request, 'Password updated.')
+            return render(request, 'reset_password/change-password.html', context)
+        else:
+            return render(request, 'reset_password/change-password.html', context)
+
+    except Exception as e:
+        print(e)
+        messages.error(request, 'url has already been used.')
+        return render(request, 'reset_password/change-password.html', context)
+
 def docregister(request):
     context = {}
     if request.method == 'POST':
         if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid')  and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
-            saveDoc = docaccounts()
-
-            saveDoc.doc_title = request.POST.get('title')
-            saveDoc.doc_name = request.POST.get('name')
-            saveDoc.doc_age = request.POST.get('age')
-            saveDoc.doc_gender = request.POST.get('gender')
-            saveDoc.doc_nid = request.POST.get('nid')
-            saveDoc.doc_address = request.POST.get('address')
-            saveDoc.doc_password = request.POST.get('password')
-            saveDoc.doc_email = request.POST.get('email')
-            saveDoc.doc_mobile = request.POST.get('mobile')
-            saveDoc.doc_birth = request.POST.get('birth')
-   
-            saveDoc.save()
-            messages.success(request, 'Acccount Created Successsfully')
-            return render(request, 'docregister.html', context)
-
-    else:
-        return render(request, 'docregister.html', context)
-
-
-def docregister(request):
-    context = {}
-    if request.method == 'POST':
-        if request.POST.get('name') and request.POST.get('title') and request.POST.get('birth') and request.POST.get('gender') and request.POST.get('nid') and request.POST.get('age') and request.POST.get('address') and request.POST.get('password') and request.POST.get('email') and request.POST.get('mobile'):
             saveDoc = docaccounts()
 
             saveDoc.doc_title = request.POST.get('title')
@@ -139,6 +158,9 @@ def login(request):
             userInfo = accounts.objects.get(email=request.POST.get('email'))
             if (request.POST.get('password') == (userInfo.password)):
                 request.session['email'] = userInfo.email
+                if userInfo.email == 'admin@admin.com':
+                    return render(request, 'adminpanel.html', {'user': userInfo})
+
                 return redirect('userindex')
             else:
                 messages.error(request, 'Incorrect Password...!')
@@ -165,30 +187,22 @@ def contact_form(request):
         return render(request, 'contact_form.html',)
 
 def userindex(request):
-    return render(request, 'userindex.html')
-
-def edit_profile(request):
-    if request.method == 'POST':
+    try:
         user = accounts.objects.get(email=request.session['email'])
-        if request.POST.get('editName') and request.POST.get('editAge') and request.POST.get('editMobile') and request.POST.get('editAddress'):
+            
+        if user.role == 'Paitent':
+            context = {'isDoctor': False}
+        else :
+            context = {'isDoctor': True}
+        return render(request, 'userindex.html', context)
+    except Exception as e:
+        return render(request, 'userindex.html')
 
-            user.name = request.POST.get('editName')
-            user.age = request.POST.get('editAge')
-            user.mobile = request.POST.get('editMobile')
-            user.address = request.POST.get('editAddress')
-            user.save()
-            messages.success(
-                request, "User details updated successfully...!")
+def search(request):
+    return render(request, 'search.html')
 
-            return redirect('edit_profile')
-    else:
-        try:
-            user = accounts.objects.get(email=request.session['email'])
-            return render(request, 'edit_profile.html', {'user': user})
-        except:
-            messages.error(request, 'You need to login first')
-            return redirect('login')
-
+def doctorslist(request):
+    return render(request, 'doctorslist.html')
 def quizform(request):
     if request.method == 'POST':
         #  if request.POST.get('ques1') and request.POST.get('ques2') and request.POST.get('ques3') and request.POST.get('ques4') and request.POST.get('ques5') and request.POST.get('ques6') and request.POST.get('ques7') and request.POST.get('ques8') :
@@ -248,6 +262,14 @@ def result(request):
 
 def information(request):
     if request.method == 'POST':
+        user = accounts.objects.get(email=request.session['email'])
+        saveCall = call()
+            
+
+        saveCall.room = request.POST.get('room')
+        saveCall.email = user.email
+            
+        saveCall.save()
         room = request.POST['room']
         get_room = chat.objects.filter(room_name=room)
         if get_room:
@@ -265,10 +287,30 @@ def information(request):
 def video(request,room,created):
     return render (request,'video.html',{'created':created, 'room':room})
 def blog(request):
-    return render(request, 'blog.html')
+    cursor = connection.cursor()
+    cursor.execute(
+        'SELECT * FROM home_blogs ;')
+    blog = cursor.fetchall()
+    cursor.close()
+    return render(request, 'blog.html',{'blog':blog})
 
-def blog1(request):
-    return render(request, 'blog1.html')
+def blog1(request, token):
+    try:
+        user = accounts.objects.get(email=request.session['email'])
+        cursor = connection.cursor()
+        cursor.execute(
+            'SELECT * FROM home_blogs WHERE home_blogs.id=%s;',
+            [token])
+        ticket = cursor.fetchall()
+        cursor.close()
+
+        return render(request, 'blog1.html', {'ticket': ticket})
+        
+        # return redirect('show_pur_ticket')
+    except:
+        messages.error(request, 'Please log in first')
+        return redirect('login')
+    
 
 def blog2(request):
     return render(request, 'blog2.html')
@@ -293,53 +335,95 @@ def blog8(request):
 
 def blog9(request):
     return render(request, 'blog9.html')
-def reset_password(request):
+
+
+def doctor_home(request):
+    return render(request, 'doctor_home.html')
+
+def doctorlist(request):
+
     try:
-        if request.method == 'POST' and request.POST.get('resetEmail'):
-            email = request.POST.get('resetEmail')
+        user = accounts.objects.get(email=request.session['email'])
+        cursor = connection.cursor()
+        cursor.execute(
+            'SELECT * FROM `users` WHERE role="Doctor";'
+            )
+        ticket = cursor.fetchall()
+        cursor.close()
 
-        if not accounts.objects.filter(email=email).first():
-            # messages.error(request, 'No user found with this email.')
-            return HttpResponse("No user found with this email.")
+        return render(request, 'doctorlist.html', {'ticket': ticket})
+        
+        # return redirect('show_pur_ticket')
+    except:
+        messages.error(request, 'Please log in first')
+        return redirect('login')
 
-        user_obj = accounts.objects.get(email=email)
-        token = str(uuid.uuid4())
-        profile_obj = Profile.objects.get(user=user_obj.id)
-        profile_obj.forget_password_token = token
-        profile_obj.save()
-        send_forget_password_mail(user_obj.email, token)
-        return HttpResponse("An email is sent.")
+def patientlist(request):
 
-    except Exception as e:
-        print(e)
-        return render(request, 'reset_password/forget-password.html')
+    try:
+        user = accounts.objects.get(email=request.session['email'])
+        cursor = connection.cursor()
+        cursor.execute(
+            'SELECT * FROM `users` WHERE role="Paitent";'
+            )
+        ti = cursor.fetchall()
+        cursor.close()
 
-def change_password(request, token):
+        return render(request, 'patientlist.html', {'ti': ti})
+        
+        # return redirect('show_pur_ticket')
+    except:
+        messages.error(request, 'Please log in first')
+        return redirect('login')
+
+def create_blog(request):
     context = {}
+    if request.method == 'POST':
+        if request.POST.get('title') and request.POST.get('blog_type') and request.POST.get('blog'):
+            saveBlog = blogs()
+            
 
+            saveBlog.title = request.POST.get('title')
+            saveBlog.blog_type = request.POST.get('blog_type')
+            saveBlog.blog = request.POST.get('blog')
+            
+            saveBlog.save()
+            
+            messages.success(request, 'Blog Has Created Successsfully')
+            return render(request, 'create_blog.html', context)
+
+    else:
+        return render(request, 'create_blog.html', context)
+
+def adminpanel(request):
     try:
-        profile_obj = profile.objects.filter(
-            forget_password_token=token).first()
-        context = {'user_id': profile_obj.user.id}
+        user = accounts.objects.get(email=request.session['email'])
 
-        if request.method == 'POST':
-            new_password = request.POST.get('new_password')
-            confirm_password = request.POST.get('reconfirm_password')
-            user_id = request.POST.get('user_id')
-
-            if user_id is None:
-                return HttpResponse("No user id found.")
-
-            if new_password != confirm_password:
-                return HttpResponse("Booth password should be equal")
-
-            user_obj = accounts.objects.filter(id=user_id).first()
-            user_obj.password = new_password
-            user_obj.save()
-            return HttpResponse("Password updated successfully!!")
+        if user.email == 'admin@admin.com':
+            return render(request, 'adminpanel.html', {'user': user})
         else:
-            return render(request, 'reset_password/change-password.html', context)
+            messages.error(request, "Restricted! Only admin can access.")
+            return redirect('home', {'user': user})
+    except:
+        messages.success(request, 'You need to login first')
+        return redirect('login')
 
-    except Exception as e:
-        print(e)
-        return HttpResponse("url has already been used.")
+
+
+
+
+def accountslist(request):
+    accountsl = accounts.objects.raw('SELECT * FROM users ')
+    return render(request, 'accountslist.html', {'accountsl': accountsl, })
+
+def messagess(request):
+    mg = accounts.objects.raw('SELECT * FROM home_msgs')
+    return render(request, 'messagess.html', {'mg': mg, })
+
+def blogslist(request):
+    bg = accounts.objects.raw('SELECT * FROM home_blogs')
+    return render(request, 'blogslist.html', {'bg': bg, })
+
+def psychiatrist(request):
+    ps = accounts.objects.raw('SELECT * FROM home_psychiatrist')
+    return render(request, 'psychiatrist.html', {'ps': ps, })
